@@ -3,9 +3,9 @@ import pdb
 import argparse
 import socket
 try:
-    from urllib2.urlparse import urlparse
+    from urllib2 import urlparse as parse
 except ImportError:
-    from urllib.parse import urlparse
+    from urllib import parse
 from flask import Flask, render_template, request, url_for, redirect, session, jsonify
 from tornado.ioloop import IOLoop
 from tornado.web import Application, RequestHandler, FallbackHandler
@@ -25,7 +25,7 @@ def main():
 @app.route('/url')
 def url():
     username = request.args.get('username','anonymous')
-    url = urlparse(request.url)
+    url = parse.urlparse(request.url)
     url = 'ws://%(netloc)s/ws' % dict(netloc=url.netloc)
     return jsonify(url=url,username=username)
 
