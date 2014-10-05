@@ -51,6 +51,7 @@ class WS(WebSocketHandler):
     def on_close(self):
         if self in self.cl:
             self.cl.remove(self)
+        self.broadcast(self.username+' left room')
 
     def authenticate(self):
         self.authenticated = True
