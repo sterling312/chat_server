@@ -2,7 +2,10 @@
 import pdb
 import argparse
 import socket
-from urllib.parse import urlparse
+try:
+    from urllib2 import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 from flask import Flask, render_template, request, url_for, redirect, session, jsonify
 from tornado.ioloop import IOLoop
 from tornado.web import Application, RequestHandler, FallbackHandler
