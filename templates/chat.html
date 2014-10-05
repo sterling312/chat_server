@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head %}
+<script src="{{ url_for('static',filename='chat.js') }}"></script>
+{% endblock head %}
+{% block body %}
+<div class='login'>
+    <input type='text' id='username'/>
+    <button id='login'>Login</button>
+</div>
+<div class='chat'>
+    <div id='window'></div>
+    <input id='message' type='text'/>
+    <button id='send'>Send</button>
+</div>
+{% endblock body %}

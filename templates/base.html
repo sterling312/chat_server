@@ -1,0 +1,18 @@
+<html>
+  <head>
+      <title>{{ title }}</title>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      {% for href in css %}
+          <style type='text/css' href="{{ url_for('static',filename=href) }}"></style>
+      {% endfor %}
+      {% for src in js %}
+          <script src="{{ url_for('static',filename=src) }}"></script>
+      {% endfor %}
+      {% block head %}
+      {% endblock head %}
+  </head>
+  <body>
+    {% block body %}
+    {% endblock body %}
+  </body>
+</html>
