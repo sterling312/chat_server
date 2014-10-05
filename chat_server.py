@@ -2,6 +2,7 @@
 import pdb
 import argparse
 import socket
+from urllib.parse import urlparse
 from flask import Flask, render_template, request, url_for, redirect, session, jsonify
 from tornado.ioloop import IOLoop
 from tornado.web import Application, RequestHandler, FallbackHandler
@@ -21,7 +22,8 @@ def main():
 @app.route('/url')
 def url():
     username = request.args.get('username','anonymous')
-    url = 'ws://%(host)s:%(port)d/ws' % dict(host=args.host,port=int(args.port))
+    url = urlparse(request.url)
+    url = 'ws://%(netloc)s/ws' % dict(netloc=url.netloc)
     return jsonify(url=url,username=username)
 
 class WS(WebSocketHandler):
