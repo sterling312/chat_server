@@ -35,14 +35,18 @@ class WS(WebSocketHandler):
         self.username = self.get_arguments('username')[0]
         if not self in self.cl:
             if self.authenticate():
-                self.cl.append(self)
                 self.write_message('connected')
+                self.broadcast(self.username+' logged in')
+                self.cl.append(self)
+
+    def broadcast(self,message):
+        for cl in self.cl:
+            cl.write_message(message)
 
     def on_message(self,msg):
         if not self.authenticated:
             return 
-        for cl in self.cl:
-            cl.write_message(self.username+': '+msg)
+        self.broadcast(self.username+': '+msg)
         
     def on_close(self):
         if self in self.cl:
