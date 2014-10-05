@@ -28,7 +28,7 @@ $(document).ready(function(){
     $('button#send').click(function(){
         var $text = $('input#message');
         ws.send($text.val());
-        $text.text('');
+        $text.val('');
     });
 
     $('button#login').click(function(){
